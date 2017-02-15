@@ -1,6 +1,6 @@
 var express = require('express');
 var router  = express.Router();
-var controller = require('../controller/users.controller')
+var controller = require('../controllers/users.controller')
 
 // GET all users
 router.get('/', controller.verifyUser, controller.getAllUser)
