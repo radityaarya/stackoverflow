@@ -9,7 +9,7 @@ require('dotenv').config()
 
 // mongoose
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/portofolio-auth');
+mongoose.connect('mongodb://localhost/stackoverflow');
 mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
