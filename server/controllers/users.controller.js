@@ -13,15 +13,22 @@ module.exports = {
 
   // CREATE a user
   createUser : (req, res) => {
-    let newUser = user({
-      username : req.body.username,
-      password : hash.generate(req.body.password)
-    })
-    newUser.save((err,create) =>{
-      res.json({
-        username : create.username,
-        password : create.password
-      })
+    user.findOne( {username : req.body.username}, (err, data) =>{
+      // FIND if username already taken or not
+      if(data) res.json({msg: "Username already taken!"})
+      // if username available, then ..
+      else{
+        let newUser = user({
+          username : req.body.username,
+          password : hash.generate(req.body.password)
+        })
+        newUser.save((err,create) =>{
+          res.json({
+            username : create.username,
+            password : create.password
+          })
+        })
+      }
     })
   },
 
@@ -35,7 +42,7 @@ module.exports = {
       }
       else if( hash.verify(req.body.password,login.password) ){
         console.log(login);
-        let token = jwt.sign( {username: login.username}, process.env.SECRET, {expiresIn : 60*60});
+        let token = jwt.sign( {username: login.username}, process.env.SECRET, {expiresIn : 600*600});
         res.json( {
           username : login.username,
           password : login.password,

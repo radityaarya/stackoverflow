@@ -9,11 +9,12 @@ require('dotenv').config()
 
 // mongoose
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/portofolio-auth');
+mongoose.connect('mongodb://localhost/stackoverflow');
 mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
 var users = require('./routes/users.route');
+var questions =  require('./routes/questions.route')
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(cors())
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/questions', questions)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,7 +5,7 @@ var controller = require('../controllers/users.controller.js')
 // GET all users
 router.get('/', controller.verifyUser, controller.getAllUser)
 // CREATE user
-router.post('/', controller.createUser)
+router.post('/signup', controller.createUser)
 // UPDATE user
 router.put('/:id', controller.verifyUser, controller.updateUser)
 // DELETE user
