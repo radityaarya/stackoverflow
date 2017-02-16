@@ -17,8 +17,8 @@ module.exports = {
       username : req.body.username,
       password : hash.generate(req.body.password)
     })
-    newUser.save((err, create) =>{
-      res.send({
+    newUser.save((err,create) =>{
+      res.json({
         username : create.username,
         password : create.password
       })
@@ -35,7 +35,7 @@ module.exports = {
       }
       else if( hash.verify(req.body.password,login.password) ){
         console.log(login);
-        let token = jwt.sign( {username: login.username, password: login.password}, process.env.SECRET, {expiresIn : 60*60});
+        let token = jwt.sign( {username: login.username}, process.env.SECRET, {expiresIn : 60*60});
         res.json( {
           username : login.username,
           password : login.password,
