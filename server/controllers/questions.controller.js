@@ -58,25 +58,25 @@ module.exports = {
     },
 
     upvoteQuestion: function(req,res){
-      voteQuestion("upvote",req.params.id,req.params.username,function(v){
+      voteQuestion("upvote", req.params.id, req.params.username,function(v){
         res.json(v)
       })
     },
 
     downvoteQuestion: function(req,res){
-      voteQuestion("downvote",req.params.id,req.params.username,function(v){
+      voteQuestion("downvote", req.params.id, req.params.username,function(v){
         res.json(v)
       })
     },
 
     upvoteAnswer: function(req,res){
-      voteAnswer("upvote",req.params.id,req.params.ansid,req.params.username,function(v){
+      voteAnswer("upvote", req.params.id, req.params.ansid, req.params.username,function(v){
         res.json(v)
       })
     },
 
     downvoteAnswer: function(req,res){
-      voteAnswer("downvote",req.params.id,req.params.ansid,req.params.username,function(v){
+      voteAnswer("downvote", req.params.id, req.params.ansid, req.params.username,function(v){
         res.json(v)
       })
     }
@@ -85,7 +85,7 @@ module.exports = {
 
 function voteQuestion(upordown, id, username, cb) {
   var cek = false
-  Question.findOne({_id:id}, function(err, data) {
+  Question.findOne({_id:id}, (err, data) => {
     if (err) return error
 
     else{
@@ -110,24 +110,25 @@ function voteQuestion(upordown, id, username, cb) {
 function voteAnswer(upordown, id, ansId, username, cb) {
   var arr
   var cek = false
-  Question.findOne({_id:id}, function(err, data) {
+  Question.findOne({_id:id}, (err, data) => {
     data.answers.forEach( (x) =>{
       if(x._id == ansId) arr = x
     })
 
-      data[upordown].forEach( (voting) => {
-        if(voting.username === username) cek = true
+      arr[upordown].forEach( (voting) => {
+        if(voting.username == username){
+          cek = true
+        };
       })
 
       if(cek == false){
-        data[upordown].push({username: username})
+        arr[upordown].push({username: username})
         data.markModified('answers')
         data.save( (err) => {
-            if (err) return cb(err)
-            else     return cb(data)
+          if (err) return cb(err)
+          else     return cb(data)
         })
       }
-
-    else return cb('already vote!')
+      else return cb('already vote!')
   })
 }
