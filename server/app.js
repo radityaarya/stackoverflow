@@ -14,7 +14,7 @@ mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
 var users = require('./routes/users.route');
-var questions =  require('./routes/questions.route')
+var questions = require('./routes/questions.route');
 
 var app = express();
 

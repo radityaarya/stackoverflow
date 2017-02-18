@@ -3,15 +3,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var questionSchema = new Schema({
-    title     : { type: String, required: true},
-    question  : String,
-    category  : Schema.Types.Mixed,
-    postedBy  : Schema.Types.Mixed ,
-    answer    : Schema.Types.Mixed,
-    vote      : Number
-},{
-  timestamps : true
-});
+    title         : { type: String, required: true} ,
+    question      : String ,
+    category      : String ,
+    postedBy      : Schema.Types.Mixed,
+    upvote        : Schema.Types.Mixed,
+    downvote      : Schema.Types.Mixed,
+    answers       : Schema.Types.Mixed
+},
+{  timestamps : true });
 
-var Question = mongoose.model("Question",questionSchema)
-module.exports = Question
+module.exports = mongoose.model("Question",questionSchema)

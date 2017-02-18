@@ -37,11 +37,11 @@ module.exports = {
     user.findOne( { username: req.body.username } )
     .then( (login) => {
       if(!login){
-        console.log(login);
+        // console.log(login);
         res.send('user not found!')
       }
       else if( hash.verify(req.body.password,login.password) ){
-        console.log(login);
+        // console.log(login);
         let token = jwt.sign( {username: login.username}, process.env.SECRET, {expiresIn : 600*600});
         res.json( {
           username : login.username,
@@ -79,7 +79,7 @@ module.exports = {
   // VERIFY a user
   verifyUser : (req, res, next) => {
     let decode = jwt.verify(req.header('token'), process.env.SECRET)
-
+    // console.log(decode);
     if (decode)
         next()
     else {

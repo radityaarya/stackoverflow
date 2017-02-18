@@ -5,12 +5,15 @@ var user    = require  ('../controllers/users.controller.js')
 
 // GET all questions
 router.get('/',  user.verifyUser, controller.showAllQuestion)
-// GET single question
-router.get('/:id',  user.verifyUser, controller.showAllQuestion)
-// CREATE user
-router.post('/:username/create', user.verifyUser, controller.createQuestion)
-// ADD answer
-router.post('/:id/ask', user.verifyUser, controller.addAnswer)
+router.get('/:id',  user.verifyUser, controller.showQuestion)
+router.post('/create/:username', controller.createQuestion)
+router.put('/:id/ask/:username', controller.addAnswer)
+router.put('/:id/upvoteq/:username',controller.upvoteQuestion)
+router.put('/:id/upvoteq/:username',controller.upvoteQuestion)
+router.put('/:id/downvoteq/:username',controller.downvoteQuestion)
+router.put('/:id/upvoteans/:ansId/:username', controller.upvoteAnswer)
+router.put('/:id/downvoteans/:ansId/:username', controller.downvoteAnswer)
+
 // // UPDATE user
 // router.put('/:id', controller.verifyUser, controller.updateUser)
 // // DELETE user
