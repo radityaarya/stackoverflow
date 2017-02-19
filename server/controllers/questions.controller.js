@@ -24,6 +24,7 @@ module.exports = {
 
   showAllQuestion : (req, res) => {
     Question.find({}, (err,data) => {
+      if(err) res.send(err)
       res.json(data)
     })
   },

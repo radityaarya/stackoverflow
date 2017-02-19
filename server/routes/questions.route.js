@@ -4,8 +4,8 @@ var controller = require('../controllers/questions.controller.js')
 var user    = require  ('../controllers/users.controller.js')
 
 // GET all questions
-router.get('/',  user.verifyUser, controller.showAllQuestion)
-router.get('/:id',  user.verifyUser, controller.showQuestion)
+router.get('/', controller.showAllQuestion)
+router.get('/:id', controller.showQuestion)
 router.post('/create/:username', controller.createQuestion)
 router.put('/:id/ask/:username', controller.addAnswer)
 router.put('/:id/upvoteq/:username',controller.upvoteQuestion)

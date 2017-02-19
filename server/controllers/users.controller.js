@@ -15,7 +15,7 @@ module.exports = {
   createUser : (req, res) => {
     user.findOne( {username : req.body.username}, (err, data) =>{
       // FIND if username already taken or not
-      if(data) res.json({msg: "Username already taken!"})
+      if(data) res.json({err: "Username already taken!"})
       // if username available, then ..
       else{
         let newUser = user({
@@ -38,7 +38,7 @@ module.exports = {
     .then( (login) => {
       if(!login){
         // console.log(login);
-        res.send('user not found!')
+        res.json({err: "User not found!"})
       }
       else if( hash.verify(req.body.password,login.password) ){
         // console.log(login);
@@ -50,7 +50,7 @@ module.exports = {
         } );
       }
       else
-          res.send('invalid username and password!')
+          res.json({err: 'invalid username or password!'})
     })
   },
 
