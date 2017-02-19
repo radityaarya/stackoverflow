@@ -18,7 +18,7 @@ module.exports = {
       })
         newQuestion.save( (err) => {
           if(err) throw err
-          res.json(newQuestion)
+          res.send(newQuestion)
         })
     },
 
