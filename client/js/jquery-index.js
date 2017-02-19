@@ -17,19 +17,36 @@ $(document).ready(function() {
             <div class="card-content">
               <div class="row margin">
 
-                <div class="col s9">
+                <div class="col s12 l9">
                   <h5 id="title-question-${data[i]._id}" class="option-show-title title-question">
                     ${data[i].title.slice(0, 75)}
                   </h5>
+                  <p style="color: rgb(103, 103, 103)">posted by : ${data[i].postedBy.username}</p>
+                  <br>
                   <p class="question-preview">${data[i].question.slice(0, 100)} ... <a>(read more)</a></p>
+                </div>
+
+                <div class="col s12 l3">
+                  <div class="row margin center-align">
+                    <div class="col s6 l6">
+                      <h5 style="color: rgb(103, 103, 103)">${data[i].upvote.length - data[i].downvote.length}</h5>
+                      <p>VOTE</p>
+                    </div>
+                    <div class="col s6 l6">
+                      <h5 style="color: rgb(103, 103, 103)">${data[i].answers.length}</h5>
+                      <p>ANSWERS</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <hr>
-
-              <p>category : <span class="chip"> ${data[i].category}</span> </p>
-
+              <div class="row margin">
+                <div class="col s12 l12">
+                  <hr>
+                  <p>category : <span class="chip"> ${data[i].category}</span> </p>
+                </div>
               </div>
+            </div>
           </a>
           `
         }
