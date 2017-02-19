@@ -1,11 +1,13 @@
 $(document).ready(function() {
 
+  $('.modal').modal();
+
   $.ajax({
     url    : `http://localhost:3000/questions/${localStorage.getItem('questionId')}`,
     method : "GET",
     success: function(data) {
       if (localStorage.getItem("token")) {
-        $('#login-or-logout').append(`<li class="navbar-rmv-hover"><a onclick="backToHome()" class="waves-effect btn waves-light log-btn" style="background-color: rgb(255, 36, 108;)">Back to Home</a></li>`)
+      $('#login-or-logout').append(`<li class="navbar-rmv-hover"><a onclick="preanswer()" href="#modal-create"  class="waves-effect btn waves-light log-btn" style="background-color: rgb(255, 36, 108)">Answer</a></li>`)
       $('#questions-list').append(`
           <div class="row margin">
 
@@ -36,7 +38,7 @@ $(document).ready(function() {
           var answer = ''
           for (var i = 0; i < data[0].answers.length; i++) {
             answer +=  `
-              <div class="card-content">
+              <div  class="card-content">
                 <div class="row margin">
                   <div class="col s12 l12">
                     <p class="answers">${data[0].answers[i].content}</p>
@@ -48,17 +50,17 @@ $(document).ready(function() {
                     <p style="color: rgb(103, 103, 103)">replied by : ${data[0].answers[i].postedBy.username}</p>
                   </div>
                   <div class="col s112 l2">
-                    <a onclick="upvoteA()" class="center modal-action modal-close waves-effect green waves-light btn" type="submit" name="button"><i class="material-icons">thumb_up</i>${data[0].answers[i].upvote.length}</a>
+                    <a onclick="upvoteA('${data[0].answers[i]._id}', 'upvoteA-${data[0].answers[i]._id}', '${[i]}')" id="upvoteA-${data[0].answers[i]._id}" class="center modal-action modal-close waves-effect green waves-light btn" type="submit" name="button"><i class="material-icons">thumb_up</i>${data[0].answers[i].upvote.length}</a>
                   </div>
                   <div class="col s112 l2">
-                    <a onclick="downvoteA()" class="center modal-action modal-close waves-effect red waves-light btn" type="submit" name="button"><i class="material-icons">thumb_down</i>${data[0].answers[i].downvote.length}</a>
+                    <a onclick="downvoteA('${data[0].answers[i]._id}', 'downvoteA-${data[0].answers[i]._id}', '${[i]}')" id="downvoteA-${data[0].answers[i]._id}" class="center modal-action modal-close waves-effect red waves-light btn" type="submit" name="button"><i class="material-icons">thumb_down</i>${data[0].answers[i].downvote.length}</a>
                   </div>
                 </div>
               </div>
               <hr />
             `
           }
-
+        $('#login-or-logout').append(`<li class="navbar-rmv-hover"><a onclick="backToHome()" class="waves-effect btn waves-light log-btn" style="background-color: rgb(255, 36, 108;)">Back to Home</a></li>`)
         $('#answers-list').append(answer)
       }else{
         console.log('asasd');
@@ -72,10 +74,10 @@ $(document).ready(function() {
 function upvoteQ(id){
   $(document).ready(function() {
     $.ajax({
-      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/upvoteq/${localStorage.getItem('username')}}`,
+      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/upvoteq/${localStorage.getItem('username')}`,
       type : "PUT",
       success: function(data){
-        console.log(data);
+        // console.log(data);
         if (data.err) alert(data.err)
         else {
           document.querySelector(`#${id}`).innerHTML = `<i class="material-icons">thumb_up</i>${data.upvote.length}`
@@ -88,10 +90,10 @@ function upvoteQ(id){
 function downvoteQ(id){
   $(document).ready(function() {
     $.ajax({
-      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/downvoteq/${localStorage.getItem('username')}}`,
+      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/downvoteq/${localStorage.getItem('username')}`,
       type : "PUT",
       success: function(data){
-        console.log(data);
+        // console.log(data);
         if (data.err) alert(data.err)
         else {
           document.querySelector(`#${id}`).innerHTML = `<i class="material-icons">thumb_down</i>${data.downvote.length}`
@@ -99,6 +101,106 @@ function downvoteQ(id){
       }
     })
   })
+}
+
+function upvoteA(idAns, idUp, index){
+  $(document).ready(function() {
+    $.ajax({
+      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/upvoteans/${idAns}/${localStorage.getItem('username')}`,
+      type : "PUT",
+      success: function(data){
+        // console.log(data);
+        if (data.err) alert(data.err)
+        else {
+          document.querySelector(`#${idUp}`).innerHTML = `<i class="material-icons">thumb_up</i>${data.answers[index].upvote.length}`
+        }
+      }
+    })
+  })
+}
+
+function downvoteA(idAns, idDown, index){
+  $(document).ready(function() {
+    $.ajax({
+      url  : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/downvoteans/${idAns}/${localStorage.getItem('username')}`,
+      type : "PUT",
+      success: function(data){
+        // console.log(data);
+        if (data.err) alert(data.err)
+        else {
+          document.querySelector(`#${idDown}`).innerHTML = `<i class="material-icons">thumb_down</i>${data.answers[index].downvote.length}`
+        }
+      }
+    })
+  })
+}
+
+function preanswer() {
+  formReset()
+
+  $('#modal-create').append(`
+    <div id="form-delete">
+        <div class="modal-content">
+        <h4 class="center-align"><b>POST YOUR ANSWER</b></h4>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+               <form class="col s12">
+                 <div class="row">
+                   <div class="input-field col s12">
+                    <textarea id="add-answer" type="text" class="materialize-textarea"></textarea>
+                    <label for="add-answer" data-error="wrong" data-success="right">ANSWER</label>
+                   </div>
+                 </div>
+               </form>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a onclick="answer()" class="modal-action modal-close waves-effect waves-light btn" type="submit" name="button" style="background-color: rgb(255, 36, 108)">CREATE</a>
+        </div>
+      </div>`)
+}
+
+function answer() {
+    $.ajax({
+      url    : `http://localhost:3000/questions/${localStorage.getItem('questionId')}/answer/${localStorage.getItem('username')}`,
+      type   : "PUT",
+      data   : {
+        content : $('#add-answer').val()
+      },
+      success: function(data) {
+        location.reload();
+        // console.log(data.answers[0]);
+        // $('#answer-list').append(`
+        //   <div class="card-content">
+        //       <div class="row margin">
+        //         <div class="col s12 l12">
+        //           <p class="answers">${data.answers[0].content}</p>
+        //         </div>
+        //       </div>
+        //       <div class="row margin">
+        //         <hr>
+        //         <div class="col s112 l8">
+        //           <p style="color: rgb(103, 103, 103)">replied by : ${data.answers[0].postedBy.username}</p>
+        //         </div>
+        //         <div class="col s112 l2">
+        //           <a onclick="upvoteA()" class="center modal-action modal-close waves-effect green waves-light btn" type="submit" name="button"><i class="material-icons">thumb_up</i>${data.answers[0].upvote.length}</a>
+        //         </div>
+        //         <div class="col s112 l2">
+        //           <a onclick="downvoteA()" class="center modal-action modal-close waves-effect red waves-light btn" type="submit" name="button"><i class="material-icons">thumb_down</i>${data.answers[0].downvote.length}</a>
+        //         </div>
+        //       </div>
+        //     </div>
+        //     <hr />
+        //   `)
+      }
+    })
 }
 
 

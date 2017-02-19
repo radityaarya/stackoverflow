@@ -115,7 +115,7 @@ function voteAnswer(upordown, id, ansId, username, cb) {
     data.answers.forEach( (x) =>{
       if(x._id == ansId) arr = x
     })
-
+    console.log(arr);
       arr[upordown].forEach( (voting) => {
         if(voting.username == username){
           cek = true
