@@ -13,14 +13,14 @@ $(document).ready(function() {
         var arrTemp = ""
         for (var i = 0; i < data.length; i++) {
           arrTemp += `
-          <a href="#">
+          <a">
             <div class="card-content">
               <div class="row margin">
 
                 <div class="col s12 l9">
-                  <h5 id="title-question-${data[i]._id}" class="option-show-title title-question">
-                    ${data[i].title.slice(0, 75)}
-                  </h5>
+                   <h5 id="title-question-${data[i]._id}" class="option-show-title title-question">
+                     ${data[i].title.slice(0, 75)}
+                   </h5>
                   <p style="color: rgb(103, 103, 103)">posted by : ${data[i].postedBy.username}</p>
                   <br>
                   <p class="question-preview">${data[i].question.slice(0, 100)} ... <a>(read more)</a></p>
@@ -41,9 +41,12 @@ $(document).ready(function() {
               </div>
 
               <div class="row margin">
-                <div class="col s12 l12">
-                  <hr>
+                <hr>
+                <div class="col s112 l10">
                   <p>category : <span class="chip"> ${data[i].category}</span> </p>
+                </div>
+                <div class="col s112 l2">
+                  <a onclick="toQuestion('${data[i]._id}')" class="modal-action modal-close waves-effect waves-light btn" type="submit" name="button" style="background-color: rgb(265, 36, 108)">READ</a>
                 </div>
               </div>
             </div>
@@ -54,8 +57,8 @@ $(document).ready(function() {
         $('#questions-list').append(arrTemp)
       }
       else{
-        $('#login-or-logout').append(`<li class="navbar-rmv-hover"><a onclick="logIn()" class="waves-effect btn waves-light log-btn" style="background-color: rgb(255, 36, 108)">Login</a></li>`)
-        $('#header-text').append('<h3 id="options" class="center-align">LOGIN FIRST</h3>')
+        $('#login-or-logout').append(`<li class="navbar-rmv-hover"><a onclick="logIn()" class="waves-effect btn waves-light log-btn" style="background-color: rgb(255, 36, 108;)">Login</a></li>`)
+        $('#header-text').append('<h3 id="options" class="center-align" style="color: rgb(255, 36, 108)"><span style="color: white; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">FullStuck</span> Overflow</h3>')
       }
 
     }
@@ -103,9 +106,12 @@ function createQuestion() {
               </div>
 
               <div class="row margin">
-                <div class="col s12 l12">
-                  <hr>
+                <hr>
+                <div class="col s112 l10">
                   <p>category : <span class="chip"> ${data.category}</span> </p>
+                </div>
+                <div class="col s112 l2">
+                  <a onclick="toQuestion('${data._id}')" class="modal-action modal-close waves-effect waves-light btn" type="submit" name="button" style="background-color: rgb(265, 36, 108)">READ</a>
                 </div>
               </div>
             </div>
@@ -155,6 +161,11 @@ function modalCreate() {
       </div>`)
 }
 
+function toQuestion(data) {
+  // console.log(data);
+  localStorage.setItem("questionId", data)
+  window.location.href = 'http://127.0.0.1:8080/question.html'
+}
 function logIn() {
   localStorage.clear()
   window.location.href = 'http://127.0.0.1:8080/login.html'
@@ -162,7 +173,7 @@ function logIn() {
 
 function logOut() {
   localStorage.clear()
-  window.location.href = 'http://127.0.0.1:8080/login.html'
+  window.location.href = 'http://127.0.0.1:8080/index.html'
 }
 
 function formReset() {

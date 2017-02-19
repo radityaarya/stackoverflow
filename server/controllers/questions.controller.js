@@ -103,7 +103,7 @@ function voteQuestion(upordown, id, username, cb) {
         })
       }
 
-    else return cb('already vote!')
+    else return cb({err :'already vote!'})
     }
   })
 }
@@ -130,6 +130,6 @@ function voteAnswer(upordown, id, ansId, username, cb) {
           else     return cb(data)
         })
       }
-      else return cb('already vote!')
+      else return cb({err :'already vote!'})
   })
 }
