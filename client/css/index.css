@@ -1,40 +1,52 @@
 body{
-  background-color: rgba(55, 197, 217, 0.07)
+  background-color: rgba(217, 176, 55, 0.07)
 }
 
-.navbar{
-  background-color: rgb(55, 197, 217)
+nav{
+ position: fixed;
 }
 
-#logo-container{
-  color: rgb(255, 36, 108);
+.logo{
+  text-align: center;
+  padding: 6px;
 }
 
-.navbar-rmv-hover:hover{
-  background-color: rgb(55, 197, 217)
+.prof-pic{
+  width: 40%;
+  height: 40%;
+  border-radius: 8px;
+  margin: 0 auto;
 }
 
-.card-panel{
-  background-color: rgba(55, 197, 217, 0.14)
+.jumbotron{
+  background-image: url("https://phlow.github.io/feeling-responsive/images/unsplash_brooklyn-bridge_header.jpg");
+  background-size: 50% 50%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .7;
+  position:sticky;
 }
 
-.card-content{
-  background-color:rgba(55, 197, 217, 0.07);
-  border: 1px solid rgb(55, 197, 217)
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  display: flex;
+  align-items: center;
 }
 
-.card-content:hover{
-  background-color: rgba(117, 202, 214, 0.26);
+.btn-main{
+  background-color: #ff5c00;
+  color: white;
+  width:100px;
+  border: 2px solid #ff5c00;
+  border-radius: 8px;
+  padding: 13px;
 }
 
-.card-content:active{
-  background-color: rgba(117, 202, 214, 0.42);
-}
-
-.title-question{
-  color: rgb(255, 36, 108);
-}
-
-.question-preview{
-  color: rgb(255, 36, 108);
+.btn-main:hover,
+.btn-main:active,
+.btn-main:target{
+  background-color: #f1883a;
+  color: white;
 }

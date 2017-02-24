@@ -1,58 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <link rel="shortcut icon" sizes="57x57" href="img/favicon.ico">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-    <script src="js/jquery-index.js"></script>
 
-    <title>FullStuck-Overflow</title>
-  </head>
-  <body>
-    <nav class="navbar" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo font-pacifico"><span style="color: white">FullStuck</span> Overflow</a>
-        <ul id="login-or-logout" class="right hide-on-med-and-down">
+    <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
 
-        </ul>
-        <ul id="create-question" class="right hide-on-med-and-down">
+    <title>ForumFOX</title>
+</head>
 
-        </ul>
-      </div>
-    </nav>
+<body>
 
     <div class="container">
-      <div class="row">
-        <div class="col l12">
-          <div class="row">
-          <div class="col s12 l12">
-            <div class="card-panel">
-              <span class="">
-                  <div id="header-text" class="row">
 
-                    <div class="col s12 l12">
-                      <div class="col s12">
-                          <div id="questions-list" class="card darken-2">
+        <nav id="navbar" class="navbar navbar-toggleable-md fixed-top  navbar-inverse bg-inverse bg-faded">
+            <div class="container">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand logo text-center " href="http://127.0.0.1:8080/index.html"><b>FORUM<span style="color: #ff6d00;">FOX</span></b></a>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <div class="col-10">
+                      <ul class="navbar-nav">
+                          <li class="nav-item active">
+                              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#">About</a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div id="loginorlogout" class="navbar-toggler-right" style="margin: 4px">
+                    <!-- <button onclick="loginPage()" id="login-submit" tabindex="1" class="pull-xs-right form-control btn btn-outline-warning my-2 my-sm-0">Log out</button> -->
+                  </div>
+              </div>
+            </div>
+        </nav>
 
-                          </div>
-                      </div>
-                    </div>
 
-              </span>
+        <header>
+          <div class="tronjumbo">
+
+          </div>
+        </header>
+
+        <div id="questions-list" class="card darken-2">
+
+        </div>
+
+        <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Thread</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group row">
+                  <label for="add-title" class="col-2 col-form-label">Title</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder=" ... " id="add-title">
+                  </div>
+                  <label for="add-category" class="col-2 col-form-label">Category</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder=" ... " id="add-category">
+                  </div>
+                  <label for="add-question" class="col-2 col-form-label">Question</label>
+                  <div class="col-10">
+                    <textarea class="form-control" type="text" id="add-question"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="closemodal" onclick="createQuestion()" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+              </div>
             </div>
           </div>
-
-          </div>
         </div>
-        </div>
-      </div>
-    </div>
+</div>
 
-    <!-- modal create -->
-    <div id="modal-create" class="modal"></div>
+</body>
 
-  </body>
 </html>

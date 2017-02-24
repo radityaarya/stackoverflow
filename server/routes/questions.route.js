@@ -13,6 +13,7 @@ router.put('/:id/upvoteq/:username',controller.upvoteQuestion)
 router.put('/:id/downvoteq/:username',controller.downvoteQuestion)
 router.put('/:id/upvoteans/:ansid/:username', controller.upvoteAnswer)
 router.put('/:id/downvoteans/:ansid/:username', controller.downvoteAnswer)
+router.delete('/delete/:id', controller.deleteQuestion)
 
 // // UPDATE user
 // router.put('/:id', controller.verifyUser, controller.updateUser)

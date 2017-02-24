@@ -22,6 +22,14 @@ module.exports = {
         })
     },
 
+    deleteQuestion: (req, res) => {
+        Question.findOneAndRemove({
+            _id: req.params.id
+        }).then((data) => {
+            res.json(data)
+        })
+    },
+
   showAllQuestion : (req, res) => {
     Question.find({}, (err,data) => {
       if(err) res.send(err)

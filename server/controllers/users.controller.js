@@ -38,7 +38,7 @@ module.exports = {
     .then( (login) => {
       if(!login){
         // console.log(login);
-        res.json({err: "User not found!"})
+        res.json({err: "Invalid username or password match!"})
       }
       else if( hash.verify(req.body.password,login.password) ){
         // console.log(login);
@@ -50,7 +50,7 @@ module.exports = {
         } );
       }
       else
-          res.json({err: 'invalid username or password!'})
+          res.json({err: 'Invalid username or password match!'})
     })
   },
 
